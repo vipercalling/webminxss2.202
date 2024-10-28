@@ -1,0 +1,28 @@
+#Title : Reflected Xss and stored xss in Webmin 2.202
+#Researcher : Abhash Khanal
+#vendor:https://webmin.com/
+#Version Affected : 2.202
+date: 28 october 2024
+
+
+
+POC-1
+
+1) I installed  webmin 2.202 in my linux environment
+2) when 127.0.0.1:10000/package-updates/index.cgi?mode=updates&search=&xnavigation=1 you reach this url 
+3)we can see a parameter named search 
+4) add payload ""><ScRiPt>alert('XSSEDBYABHASH')</sCrIpT> beside the search parameter.
+5) now reload the url you will get the xss is being executed.
+
+poc-2 
+1) now go to the notification bar on the right hand side 
+2) you have the option for the message broadcast now send the payload 
+""><ScRiPt>alert('XSSEDBYABHASH')</sCrIpT>
+3) now wait for some time 
+4) The message will take time and will load after that the xss will be stored and will be displayed once clicked.
+
+poc-3
+1) navigate to https://127.0.0.1:10000/passwd/edit_passwd.cgi?user=root&xnavigation=1
+2) now we can see the user parameter there 
+3) add the payload the payload ""><ScRiPt>alert('XSSEDBYABHASH')</sCrIpT> in the parameter 
+4) reload the page xss will be executed.
